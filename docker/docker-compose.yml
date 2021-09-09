@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+## app
+  app:
+    restart: unless-stopped
+    build:
+      context: ./app/
+      dockerfile: ${DOCKERFILE_ENVIRONMENT_PATH}
+      args:
+        - NON_ROOT_UID=${NON_ROOT_UID}
+        - PHP_VERSION=${PHP_VERSION}
+        - APP_PATH=${APP_CODE_PATH_CONTAINER}
+    environment:
+      - APP_PATH=${APP_CODE_PATH_CONTAINER}
+      - APP_PORT=${APP_PORT}
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_HOST=${DB_HOST}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_USERNAME=${DB_USERNAME}
+      - APP_DEBUG=${APP_DEBUG}
+      - APP_ENV=${APP_ENV}
+      - APP_KEY=${APP_KEY}
+      - LOG_CHANNEL=${LOG_CHANNEL}
+    volumes:
+      - ${APP_CODE_PATH_SOURCE}:${APP_CODE_PATH_CONTAINER}
+    ports:
+      - "${APP_PORT}:${PHP_FPM_PORT}"
+    container_name: app
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "5"
+
+## MySQL
+  app-mysql:
+    image: mysql:${MYSQL_VERSION}
+    restart: unless-stopped
+    environment:
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${DATA_PATH_HOST}:/var/lib/mysql
+      - ./mysql:/etc/mysql/conf.d
+    ports:
+      - "${MYSQL_PORT}:3306"
+    container_name: app-mysql
+
+## Nginx
+  webserver:
+    image: nginx:alpine
+    container_name: webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8080:80"
+    volumes:
+      - ./../laravel:/var/www/
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
