@@ -29,6 +29,9 @@ After cloning those repositories:
   docker exec app composer install
   ```
 
+### Hosting Details
+- Access laravel api with `http://localhost:8080/api`
+
 ### Docker Compose Commands
 - `docker-compose up -d --build ${app-name}` this will build the container which indicates in docker-compose.yml
   - `up` is to spin the container
