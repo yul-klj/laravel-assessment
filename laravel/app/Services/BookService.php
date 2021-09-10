@@ -31,7 +31,7 @@ class BookService
      * @param string $orderByClause order by clause
      * @return array
      */
-    public function allBook(
+    public function getAllBook(
         string $orderByField = 'id',
         string $orderByClause = 'asc'
     ) {

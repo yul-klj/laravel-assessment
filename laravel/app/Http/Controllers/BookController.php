@@ -43,7 +43,7 @@ class BookController extends Controller
     {
         $orderField = $request->input('order_field', 'id');
         $orderClause = $request->input('order_clause', 'asc');
-        $books = app(BookService::class)->allBook($orderField, $orderClause);
+        $books = app(BookService::class)->getAllBook($orderField, $orderClause);
         return $this->respondAccomplished('Books retrived', $books);
     }
 
