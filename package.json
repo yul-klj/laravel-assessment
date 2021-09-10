@@ -1,0 +1,9 @@
+{
+        "private": true,
+        "scripts": {
+                "precommit": "./laravel/vendor/bin/phpcs -p --colors --standard=laravel/check_style_rules.xml laravel/routes laravel/public laravel/config laravel/app/Console laravel/app/Events laravel/app/Exceptions laravel/app/Http laravel/app/Listeners laravel/app/Providers"
+        },
+        "devDependencies": {
+                "husky": "^0.14.3"
+        }
+}

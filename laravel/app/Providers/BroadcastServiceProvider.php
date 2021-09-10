@@ -5,8 +5,10 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\ServiceProvider;
 
+// @codingStandardsIgnoreStart
 class BroadcastServiceProvider extends ServiceProvider
 {
+    // @codingStandardsIgnoreEnd
     /**
      * Bootstrap any application services.
      *

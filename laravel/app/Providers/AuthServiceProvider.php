@@ -5,8 +5,10 @@ namespace App\Providers;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
+// @codingStandardsIgnoreStart
 class AuthServiceProvider extends ServiceProvider
 {
+    // @codingStandardsIgnoreEnd
     /**
      * The policy mappings for the application.
      *

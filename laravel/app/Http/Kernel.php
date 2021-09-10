@@ -4,8 +4,10 @@ namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
+// @codingStandardsIgnoreStart
 class Kernel extends HttpKernel
 {
+    // @codingStandardsIgnoreEnd
     /**
      * The application's global HTTP middleware stack.
      *

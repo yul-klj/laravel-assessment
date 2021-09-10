@@ -4,8 +4,10 @@ namespace App\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\TrimStrings as Middleware;
 
+// @codingStandardsIgnoreStart
 class TrimStrings extends Middleware
 {
+    // @codingStandardsIgnoreEnd
     /**
      * The names of the attributes that should not be trimmed.
      *

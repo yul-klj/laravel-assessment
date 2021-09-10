@@ -5,8 +5,10 @@ namespace App\Exceptions;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
+// @codingStandardsIgnoreStart
 class Handler extends ExceptionHandler
 {
+    // @codingStandardsIgnoreEnd
     /**
      * A list of the exception types that are not reported.
      *

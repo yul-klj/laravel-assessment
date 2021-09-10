@@ -7,14 +7,16 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+// @codingStandardsIgnoreStart
 class RedirectIfAuthenticated
 {
+    // @codingStandardsIgnoreEnd
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string|null  ...$guards
+     * @param \Illuminate\Http\Request $request   Request object
+     * @param \Closure                 $next      Next request
+     * @param string|null              ...$guards Guards String
      * @return mixed
      */
     public function handle(Request $request, Closure $next, ...$guards)
