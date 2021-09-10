@@ -2,8 +2,11 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Exception;
 use Throwable;
+use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 // @codingStandardsIgnoreStart
 class Handler extends ExceptionHandler
@@ -39,5 +42,44 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+
+        $this->renderable(function (Exception $e, $request) {
+            return $this->handleException($request, $e);
+        });
+    }
+
+    /**
+     * Rendering and response towards the error catched
+     *
+     * @return response
+     */
+    public function handleException($request, Exception $exception)
+    {
+        $content_type = 'application/json';
+
+        switch (true) {
+            case $exception instanceof NotFoundHttpException:
+                $content = json_encode([
+                    'code' => Controller::CODE_NOT_FOUND,
+                    'http_code' => 404,
+                    'content' => [
+                        'error' => 'The specified URL cannot be found.'
+                    ]
+                ]);
+                $response = response($content, 404);
+                break;
+            default:
+                $content = json_encode([
+                    'code' => Controller::CODE_INTERNAL_ERROR,
+                    'http_code' => 500,
+                    'content' => [
+                        'error' => 'Internal server error, kindly seek advice from system admin.'
+                    ]
+                ]);
+                $response = response($content, 500);
+        }
+
+        $response->header('Content-Type', $content_type);
+        return $response;
     }
 }
