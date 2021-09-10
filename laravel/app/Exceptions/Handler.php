@@ -73,7 +73,8 @@ class Handler extends ExceptionHandler
                     'code' => Controller::CODE_INTERNAL_ERROR,
                     'http_code' => 500,
                     'content' => [
-                        'error' => 'Internal server error, kindly seek advice from system admin.'
+                        'error' => 'Internal server error, kindly seek advice from system admin.',
+                        'debug' => $exception->getMessage()
                     ]
                 ]);
                 $response = response($content, 500);
