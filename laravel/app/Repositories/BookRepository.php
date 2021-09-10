@@ -96,4 +96,21 @@ class BookRepository
 
         return true;
     }
+
+    /**
+     * Search book
+     *
+     * @param array $params search object key mapping, key = field, value = keyword
+     * @return Book
+     * @throws \Exception
+     */
+    public function search(array $params = [])
+    {
+        $bookModel = $this->getModel();
+        foreach ($params as $key => $value) {
+            $bookModel = $bookModel->orWhere($key, 'LIKE', "%$value%");
+        }
+
+        return $bookModel->get();
+    }
 }

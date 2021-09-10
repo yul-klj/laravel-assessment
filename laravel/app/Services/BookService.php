@@ -94,4 +94,22 @@ class BookService
         }
         return $this->bookRepository->delete($bookDetail);
     }
+
+    /**
+     * Search Book
+     *
+     * @param string $keyword Search book keyword
+     * @return array
+     */
+    public function search(string $keyword)
+    {
+        $searchFields = ['title', 'author'];
+        $searchMappedFields = [];
+        array_map(function ($value) use (&$searchMappedFields, $keyword) {
+            $searchMappedFields[$value] = $keyword;
+            return $searchMappedFields;
+        }, $searchFields);
+
+        return $this->bookRepository->search($searchMappedFields);
+    }
 }
