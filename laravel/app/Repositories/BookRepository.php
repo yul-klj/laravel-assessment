@@ -53,7 +53,7 @@ class BookRepository
     {
         $bookModel = $this->getModel();
 
-        return $bookModel::paginate(self::PAGINATE);
+        return $bookModel::cursorPaginate(self::PAGINATE);
     }
 
     /**
@@ -117,6 +117,6 @@ class BookRepository
             $bookModel = $bookModel->orWhere($key, 'LIKE', "%$value%");
         }
 
-        return $bookModel->paginate(self::PAGINATE);
+        return $bookModel->cursorPaginate(self::PAGINATE);
     }
 }
