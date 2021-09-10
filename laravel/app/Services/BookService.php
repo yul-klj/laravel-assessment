@@ -40,26 +40,26 @@ class BookService
      * Get book detail
      *
      * @param int $id book id to be retrive
-     * @return Book
+     * @return array
      */
-    public function bookDetail(int $id)
+    public function getBookDetail(int $id)
     {
         $bookDetail = $this->bookRepository->getById($id);
 
-        return $bookDetail;
+        return $bookDetail->toArray();
     }
 
     /**
      * Create Book
      *
      * @param array $data Validated data to be inserted
-     * @return Book
+     * @return array
      */
     public function create(array $data)
     {
-        $book = $this->bookRepository->create($data);
+        $bookDetail = $this->bookDetailRepository->create($data);
 
-        return $book;
+        return $bookDetail->toArray();
     }
 
     /**
@@ -67,7 +67,7 @@ class BookService
      *
      * @param int   $id   Book id to update
      * @param array $data Validated data to be inserted
-     * @return Book
+     * @return array
      */
     public function update(int $id, array $data)
     {
@@ -77,14 +77,14 @@ class BookService
         }
         $bookDetail = $this->bookRepository->update($bookDetail, $data);
 
-        return $bookDetail;
+        return $bookDetail->toArray();
     }
 
     /**
      * Create Book
      *
      * @param int $id Get specific book id to perform delete
-     * @return Book
+     * @return boolean
      */
     public function delete(int $id)
     {
@@ -110,6 +110,8 @@ class BookService
             return $searchMappedFields;
         }, $searchFields);
 
-        return $this->bookRepository->search($searchMappedFields);
+        $books = $this->bookRepository->search($searchMappedFields);
+
+        return $books->toArray();
     }
 }
