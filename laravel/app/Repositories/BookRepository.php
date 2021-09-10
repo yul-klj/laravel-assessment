@@ -16,6 +16,12 @@ use App\Models\Book;
 class BookRepository
 {
     /**
+     * Set Pagination default amount
+     *
+     */
+    const PAGINATE = 10;
+
+    /**
      * Load model into repository
      *
      * @return Book
@@ -47,7 +53,7 @@ class BookRepository
     {
         $bookModel = $this->getModel();
 
-        return $bookModel::all();
+        return $bookModel::paginate(self::PAGINATE);
     }
 
     /**
@@ -111,6 +117,6 @@ class BookRepository
             $bookModel = $bookModel->orWhere($key, 'LIKE', "%$value%");
         }
 
-        return $bookModel->get();
+        return $bookModel->paginate(self::PAGINATE);
     }
 }
