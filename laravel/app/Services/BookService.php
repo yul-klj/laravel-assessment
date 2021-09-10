@@ -27,7 +27,6 @@ class BookService
     /**
      * Get all Book
      *
-     * @param array $data Validated data to be inserted
      * @return Book
      */
     public function allBook()
@@ -40,7 +39,7 @@ class BookService
     /**
      * Get book detail
      *
-     * @param array $data Validated data to be inserted
+     * @param int $id book id to be retrive
      * @return Book
      */
     public function bookDetail(int $id)

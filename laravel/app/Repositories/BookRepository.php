@@ -40,7 +40,7 @@ class BookRepository
 
     /**
      * Get All Books
-     * 
+     *
      * @return array
      */
     public function getAll()
@@ -86,7 +86,7 @@ class BookRepository
     /**
      * Delete book
      *
-     * @param Book  $book book object
+     * @param Book $book book object
      * @return Book
      * @throws \Exception
      */
