@@ -47,13 +47,18 @@ class BookRepository
     /**
      * Get All Books
      *
-     * @return array
+     * @param string $orderByField  order by field
+     * @param string $orderByClause order by clause
+     * @return Book
      */
-    public function getAll()
-    {
+    public function getAll(
+        string $orderByField = 'id',
+        string $orderByClause = 'ASC'
+    ) {
         $bookModel = $this->getModel();
+        $bookModel = $bookModel->orderBy($orderByField, $orderByClause);
 
-        return $bookModel::cursorPaginate(self::PAGINATE);
+        return $bookModel->cursorPaginate(self::PAGINATE);
     }
 
     /**
@@ -107,15 +112,21 @@ class BookRepository
      * Search book
      *
      * @param array $params search object key mapping, key = field, value = keyword
+     * @param string $orderByField  order by field
+     * @param string $orderByClause order by clause
      * @return Book
      * @throws \Exception
      */
-    public function search(array $params = [])
-    {
+    public function search(
+        array $params = [],
+        string $orderByField = 'id',
+        string $orderByClause = 'ASC'
+    ) {
         $bookModel = $this->getModel();
         foreach ($params as $key => $value) {
             $bookModel = $bookModel->orWhere($key, 'LIKE', "%$value%");
         }
+        $bookModel = $bookModel->orderBy($orderByField, $orderByClause);
 
         return $bookModel->cursorPaginate(self::PAGINATE);
     }

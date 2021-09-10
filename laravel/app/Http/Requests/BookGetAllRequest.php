@@ -4,15 +4,14 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 use Illuminate\Validation\Validator;
-use Illuminate\Support\Facades\Route;
 
 /**
- * Class BookSearchRequest
+ * Class BookGetAllRequest
  *
  * @package App\Http\Requests
  * @author Yul <yul_klj@hotmail.com>
  */
-class BookSearchRequest extends Request
+class BookGetAllRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,9 +31,6 @@ class BookSearchRequest extends Request
     public function rules()
     {
         return [
-            'keyword' => [
-                'required'
-            ],
             'order_field' => [
                 'nullable',
                 'in:id,title,author'
@@ -42,7 +38,7 @@ class BookSearchRequest extends Request
             'order_clause' => [
                 'nullable',
                 'in:asc,desc'
-            ]
+            ],
         ];
     }
 }

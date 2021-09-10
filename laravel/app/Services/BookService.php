@@ -27,13 +27,17 @@ class BookService
     /**
      * Get all Book
      *
-     * @return Book
+     * @param string $orderByField  order by field
+     * @param string $orderByClause order by clause
+     * @return array
      */
-    public function allBook()
-    {
-        $books = $this->bookRepository->getAll();
+    public function allBook(
+        string $orderByField = 'id',
+        string $orderByClause = 'asc'
+    ) {
+        $books = $this->bookRepository->getAll($orderByField, $orderByClause);
 
-        return $books;
+        return $books->toArray();
     }
 
     /**
@@ -98,11 +102,16 @@ class BookService
     /**
      * Search Book
      *
-     * @param string $keyword Search book keyword
+     * @param string $keyword       Search book keyword
+     * @param string $orderByField  order by field
+     * @param string $orderByClause order by clause
      * @return array
      */
-    public function search(string $keyword)
-    {
+    public function search(
+        string $keyword,
+        string $orderByField = 'id',
+        string $orderByClause = 'asc'
+    ) {
         $searchFields = ['title', 'author'];
         $searchMappedFields = [];
         array_map(function ($value) use (&$searchMappedFields, $keyword) {
@@ -110,7 +119,11 @@ class BookService
             return $searchMappedFields;
         }, $searchFields);
 
-        $books = $this->bookRepository->search($searchMappedFields);
+        $books = $this->bookRepository->search(
+            $searchMappedFields,
+            $orderByField,
+            $orderByClause
+        );
 
         return $books->toArray();
     }
