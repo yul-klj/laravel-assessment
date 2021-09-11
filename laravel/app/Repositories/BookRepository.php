@@ -79,7 +79,7 @@ class BookRepository
     }
 
     /**
-     * Update book
+     * Update Book
      *
      * @param Book  $book book object
      * @param array $data data to be updated
@@ -95,7 +95,7 @@ class BookRepository
     }
 
     /**
-     * Delete book
+     * Delete Book
      *
      * @param Book $book book object
      * @return Book
@@ -109,7 +109,7 @@ class BookRepository
     }
 
     /**
-     * Search book
+     * Search Book
      *
      * @param array  $params        search object key mapping, key = field, value = keyword
      * @param string $orderByField  order by field

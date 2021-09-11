@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Repositories\BookRepository;
 
 /**
- * Class Book Service
+ * Class BookService
  *
  * @package App\Services
  * @author Yul <yul_klj@hotmail.com>
@@ -17,7 +17,7 @@ class BookService
     /**
      * BookService constructor.
      *
-     * @param bookRepository $bookRepository book repository
+     * @param BookRepository $bookRepository book repository
      */
     public function __construct(BookRepository $bookRepository)
     {
@@ -41,7 +41,7 @@ class BookService
     }
 
     /**
-     * Get book detail
+     * Get Book detail
      *
      * @param int $id book id to be retrive
      * @return array
@@ -85,7 +85,7 @@ class BookService
     }
 
     /**
-     * Create Book
+     * Delete Book
      *
      * @param int $id Get specific book id to perform delete
      * @return boolean
