@@ -17,6 +17,11 @@ class Book extends Model
     use HasFactory;
     use SoftDeletes;
 
+    const ALL_FIELDS = [
+        'title',
+        'author'
+    ];
+
     protected $table = 'books';
 
     /**

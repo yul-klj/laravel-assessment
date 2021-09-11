@@ -130,4 +130,25 @@ class BookRepository
 
         return $bookModel->cursorPaginate(self::PAGINATE);
     }
+
+    /**
+     * Validate Book field exist
+     *
+     * @param string $fieldName Field name to validate
+     * @return boolean
+     */
+    public function validateDbField(string $fieldName)
+    {
+        return in_array($fieldName, Book::ALL_FIELDS);
+    }
+
+    /**
+     * Get all related db field
+     *
+     * @return array
+     */
+    public function getAllRelatedDbField()
+    {
+        return Book::ALL_FIELDS;
+    }
 }
