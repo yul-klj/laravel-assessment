@@ -62,6 +62,19 @@ class BookRepository
     }
 
     /**
+     * Get All Books data for specific field(s)
+     *
+     * @param array $fields Fields to retrive from db
+     * @return Book
+     */
+    public function getAllByFields(array $fields = [])
+    {
+        $bookModel = $this->getModel();
+
+        return $bookModel->get($fields);
+    }
+
+    /**
      * Create Book
      *
      * @param array $data Book data
