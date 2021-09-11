@@ -14,14 +14,12 @@ services:
     environment:
       - APP_PATH=${APP_CODE_PATH_CONTAINER}
       - APP_PORT=${APP_PORT}
-      - DB_DATABASE=${DB_DATABASE}
       - DB_HOST=${DB_HOST}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_USERNAME=${DB_USERNAME}
       - APP_DEBUG=${APP_DEBUG}
       - APP_ENV=${APP_ENV}
       - APP_KEY=${APP_KEY}
-      - LOG_CHANNEL=${LOG_CHANNEL}
     volumes:
       - ${APP_CODE_PATH_SOURCE}:${APP_CODE_PATH_CONTAINER}
     ports:
