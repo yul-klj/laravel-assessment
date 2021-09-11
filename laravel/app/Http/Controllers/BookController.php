@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\BookService;
-use App\Http\Requests\BookRequest;
+use App\Http\Requests\BookCreateRequest;
 use App\Http\Requests\BookUrlRequest;
 use App\Http\Requests\BookGetAllRequest;
 use App\Http\Requests\BookSearchRequest;
@@ -21,11 +21,11 @@ class BookController extends Controller
     /**
      * Create Book
      *
-     * @param BookRequest $request Book request
+     * @param BookCreateRequest $request Book request
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function create(BookRequest $request)
+    public function create(BookCreateRequest $request)
     {
         $inputs = $request->only(['title', 'author']);
         $book = app(BookService::class)->create($inputs);

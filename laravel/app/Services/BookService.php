@@ -61,7 +61,7 @@ class BookService
      */
     public function create(array $data)
     {
-        $bookDetail = $this->bookDetailRepository->create($data);
+        $bookDetail = $this->bookRepository->create($data);
 
         return $bookDetail->toArray();
     }

@@ -6,12 +6,12 @@ use App\Http\Requests\Request;
 use Illuminate\Validation\Validator;
 
 /**
- * Class BookRequest
+ * Class BookCreateRequest
  *
  * @package App\Http\Requests
  * @author Yul <yul_klj@hotmail.com>
  */
-class BookRequest extends Request
+class BookCreateRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
