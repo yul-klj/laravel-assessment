@@ -31,7 +31,7 @@ class BookRetrieveTest extends TestCase
     }
 
     /**
-     * A basic test example.
+     * Test Books retrival success
      *
      * @return void
      */
@@ -46,7 +46,7 @@ class BookRetrieveTest extends TestCase
     }
 
     /**
-     * A basic test example.
+     * Test Books search success
      *
      * @return void
      */
