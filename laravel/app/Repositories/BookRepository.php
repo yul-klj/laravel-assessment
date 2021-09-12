@@ -58,7 +58,7 @@ class BookRepository
         $bookModel = $this->getModel();
         $bookModel = $bookModel->orderBy($orderByField, $orderByClause);
 
-        return $bookModel->cursorPaginate(self::PAGINATE);
+        return $bookModel->get();
     }
 
     /**
