@@ -28,6 +28,10 @@ After cloning those repositories:
   ```
   docker exec app composer install
   ```
+  - Run below commdn for `app` container on storage link, for export download usage
+  ```
+  docker exec app php artisan storage:link
+  ```
 
 ### Hosting Details
 - Access laravel api with `http://localhost:8080/api`
