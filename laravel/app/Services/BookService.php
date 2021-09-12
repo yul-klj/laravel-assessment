@@ -108,16 +108,19 @@ class BookService
      * @return array
      */
     public function search(
-        string $keyword,
+        string $keyword = null,
         string $orderByField = 'id',
         string $orderByClause = 'asc'
     ) {
         $searchFields = ['title', 'author'];
         $searchMappedFields = [];
-        array_map(function ($value) use (&$searchMappedFields, $keyword) {
-            $searchMappedFields[$value] = $keyword;
-            return $searchMappedFields;
-        }, $searchFields);
+
+        if (! empty($keyword)) {
+            array_map(function ($value) use (&$searchMappedFields, $keyword) {
+                $searchMappedFields[$value] = $keyword;
+                return $searchMappedFields;
+            }, $searchFields);
+        }
 
         $books = $this->bookRepository->search(
             $searchMappedFields,

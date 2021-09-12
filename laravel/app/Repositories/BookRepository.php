@@ -124,7 +124,7 @@ class BookRepository
     /**
      * Search Book
      *
-     * @param array  $params        search object key mapping, key = field, value = keyword
+     * @param array  $params        search mapping, key = field, value = keyword
      * @param string $orderByField  order by field
      * @param string $orderByClause order by clause
      * @return Book
