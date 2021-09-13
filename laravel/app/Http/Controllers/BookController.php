@@ -108,7 +108,7 @@ class BookController extends Controller
      */
     public function search(BookSearchRequest $request)
     {
-        $keyword = $request->input('keyword', '');
+        $keyword = $request->input('keyword', null);
         $orderField = $request->input('order_field', 'id');
         $orderClause = $request->input('order_clause', 'asc');
         $books = app(BookService::class)->search(

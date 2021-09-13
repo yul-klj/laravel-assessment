@@ -24,9 +24,17 @@ After cloning those repositories:
   ```
   docker exec app-mysql mysql -psecret -e "create database laravel;"
   ```
+  - Run below command for `app` container for create `.env`
+  ```
+  docker exec app cp .env.example .env
+  ```
   - Run below command for `app` container for composer dependencies install
   ```
   docker exec app composer install
+  ```
+  - Run below commdn for `app` container on storage link, for export download usage
+  ```
+  docker exec app php artisan storage:link
   ```
 
 ### Hosting Details

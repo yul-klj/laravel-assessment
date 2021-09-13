@@ -33,7 +33,7 @@ class BookSearchRequest extends Request
     {
         return [
             'keyword' => [
-                'required'
+                'nullable'
             ],
             'order_field' => [
                 'nullable',
