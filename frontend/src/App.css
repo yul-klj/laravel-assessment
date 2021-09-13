@@ -1,0 +1,12 @@
+.list .action {
+  cursor: pointer;
+}
+
+.red {
+  color: red;
+}
+
+.icon {
+  display: flex;
+  justify-content: space-between;
+}
