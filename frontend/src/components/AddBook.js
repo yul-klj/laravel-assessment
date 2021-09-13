@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import BookDataService from "../services/BookService"
 import Alert from 'react-bootstrap/Alert'
 import StructureLaravelValidationError from "../Utils/StructureLaravelValidationError"
+import BookInputForm from "../Utils/BookInputForm"
 
 const AddBook = props => {
   const initialBookState = {
@@ -13,11 +14,6 @@ const AddBook = props => {
   const [submitted, setSubmitted] = useState(false)
   const [message, setMessage] = useState("")
   const [validationResError, setValidationResError] = useState("")
-
-  const handleInputChange = event => {
-    const { name, value } = event.target
-    setBook({ ...book, [name]: value })
-  }
 
   const saveBook = (e) => {
     // e.preventDefault()
@@ -81,31 +77,8 @@ const AddBook = props => {
               <StructureLaravelValidationError errorData={validationResError}></StructureLaravelValidationError>
             </Alert>
           : ''}
-          <div className="input-group mb-3 w-50">
-            <span className="input-group-text" htmlFor="title">Title<span className="red">*</span></span>
-            <input
-              type="text"
-              className="form-control"
-              id="title"
-              required
-              value={book.title}
-              onChange={handleInputChange}
-              name="title"
-            />
-          </div>
 
-          <div className="input-group mb-3 w-50">
-            <span className="input-group-text" htmlFor="author">Author<span className="red">*</span></span>
-            <input
-              type="text"
-              className="form-control"
-              id="author"
-              required
-              value={book.author}
-              onChange={handleInputChange}
-              name="author"
-            />
-          </div>
+          <BookInputForm book={book} setBook={setBook}></BookInputForm>
 
           <div className="w-50 text-end">
             <button
