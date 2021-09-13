@@ -20,9 +20,9 @@ A collection of script for assessment project.
 After cloning those repositories:
   - Go to docker folder: `cd docker`
   - Spin up the containers: `docker-compose up -d --build app-mysql app webserver`
-  - Run below command for `-mysql` container for mysql database creation
+  - Run below command for `mysql` container for mysql database creation
   ```
-  docker exec app-mysql mysql -psecret -e "create database laravel;"
+  docker exec app-mysql mysql -u root -psecret -e "create database laravel;"
   ```
   - Run below command for `app` container for create `.env`
   ```
@@ -32,9 +32,13 @@ After cloning those repositories:
   ```
   docker exec app composer install
   ```
-  - Run below commdn for `app` container on storage link, for export download usage
+  - Run below command for `app` container on storage link, for export download usage
   ```
   docker exec app php artisan storage:link
+  ```
+  - Run below command for `app` container on migrations
+  ```
+  docker exec app php artisan migrate
   ```
 
 ### Hosting Details
