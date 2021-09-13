@@ -57,4 +57,5 @@ services:
       - "8080:80"
     volumes:
       - ./../laravel:/var/www/
+      - ./../laravel/storage/app/public:/var/www/frontend/storage
       - ./nginx/conf.d/:/etc/nginx/conf.d/

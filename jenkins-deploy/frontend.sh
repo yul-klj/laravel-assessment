@@ -14,7 +14,7 @@ PRIVATE_IP=$1
 BASE_API_URL=$2
 
 REMOTE_SERVER_USER=ubuntu
-REMOTE_WORKDIR="/home/${REMOTE_SERVER_USER}/laravel-assessment/frontend"
+REMOTE_WORKDIR="/home/${REMOTE_SERVER_USER}/laravel-assessment/laravel/frontend"
 
 cd $DIR/laravel-assessment/frontend;
 
