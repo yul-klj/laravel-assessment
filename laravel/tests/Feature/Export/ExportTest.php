@@ -6,8 +6,15 @@ use Faker;
 use Tests\TestCase;
 use App\Models\Book;
 use App\Models\Export;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+/**
+ * Feature Test for Export
+ *
+ * @package Tests\Feature
+ * @author Yul <yul_klj@hotmail.com>
+ */
 class ExportTest extends TestCase
 {
     use RefreshDatabase;
@@ -27,9 +34,9 @@ class ExportTest extends TestCase
     protected function tearDown():void
     {
         parent::tearDown();
-    }
         $file = new Filesystem;
         $file->cleanDirectory('storage/app/public');
+    }
 
     /**
      * Test Book Export CSV
