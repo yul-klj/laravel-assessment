@@ -5,23 +5,14 @@ import Alert from 'react-bootstrap/Alert'
 
 const BookListFrontendPaginate = (props) => {
   const [books, setBooks] = useState([])
-  const [searchKeyword, setSearchKeyword] = useState("")
   const bookRef = useRef()
   const [message, setMessage] = useState("")
-
-  const [nextPageToken, setNextPageToken] = useState("")
-  const [previousPageToken, setPreviousPageToken] = useState("")
 
   bookRef.current = books
 
   useEffect(() => {
     retrieveBooks()
   }, [])
-
-  const onChangeSearchKeyword = (e) => {
-    const searchKeyword = e.target.value
-    setSearchKeyword(searchKeyword)
-  }
 
   const retrieveBooks = () => {
     BookDataService.getAll()

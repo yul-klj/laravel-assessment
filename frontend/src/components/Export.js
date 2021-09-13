@@ -32,12 +32,12 @@ const Export = (props) => {
     ExportService.generate(exportType, exportField)
       .then(async (response) => {
         const resData = await response
-        if (resData.status == 200) {
+        if (resData.status === 200) {
           return Promise.resolve(resData.data.content.data.id)
         }
       })
       .then(async (exportedId) => {
-        const timer = setTimeout(() => {
+        setTimeout(() => {
           retrieveExport(exportedId)
         }, 1000)
       })

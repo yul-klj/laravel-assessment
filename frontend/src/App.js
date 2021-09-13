@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React from "react"
 import { Switch, Route, Link } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "@fortawesome/fontawesome-free/css/all.css"
@@ -15,9 +15,9 @@ function App() {
   return (
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <a href="#" className="navbar-brand">
+        <Link to={"#"} className="navbar-brand">
           Book Management
-        </a>
+        </Link>
         <div className="navbar-nav mr-auto">
           <li className="nav-item">
             <Link to={"/books-fe-paginate"} className="nav-link">

@@ -112,7 +112,6 @@ const BookListBackendPaginate = (props) => {
     getTableBodyProps,
     headerGroups,
     page,
-    state: {pageIndex},
     prepareRow,
   } = useTable({
       columns,

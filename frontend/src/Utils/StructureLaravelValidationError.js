@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React from "react"
 
 const StructureLaravelValidationError = ({errorData}) => {
   const errorItems = Object.keys(errorData).map( (key, i) => {
