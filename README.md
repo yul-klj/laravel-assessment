@@ -40,6 +40,25 @@ After cloning those repositories:
 ### Hosting Details
 - Access laravel api with `http://localhost:8080/api`
 
+### Deployment
+- Setup a two jenkins job to deploy the code
+  - API
+    - Run the script `jenkins-deploy/api.sh`
+    - Jenkins will download the sourcode from github
+    - The script will rsync laravel codes to remote server
+    - Kindly provide the two parameters when running `PRIVATE_IP BUILD_METHOD`
+      - First parameter is remote server ip
+      - Second parameter defines which build to run
+        - `Heavy` includes composer install and aritsan migrate
+        - `Lite` only runs aritsan optimize and aritsan queue restart
+  - Frontend
+    - Run the script `jenkins-deploy/frontend.sh`
+    - Jenkins will download the sourcode from github
+    - The script will rsync frontend build codes to remote server
+    - Kindly provide the two parameters when running `PRIVATE_IP BASE_API_URL`
+      - First parameter is remote server ip
+      - Second parameter is `base api url` that wanted to point to
+
 ### Docker Compose Commands
 - `docker-compose up -d --build ${app-name}` this will build the container which indicates in docker-compose.yml
   - `up` is to spin the container
