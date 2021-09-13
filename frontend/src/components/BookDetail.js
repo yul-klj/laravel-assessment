@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
 import BookDataService from "../services/BookService"
 import Alert from 'react-bootstrap/Alert'
-import StructureLaravelValidationError from "../Utils/StructureLaravelValidationError"
 import BookInputForm from "../Utils/BookInputForm"
+import LaravelValidationAlert from "../Utils/LaravelValidationAlert"
 
 const BookDetail = props => {
   const initialBookState = {
@@ -29,10 +29,8 @@ const BookDetail = props => {
     getBookDetail(props.match.params.id)
   }, [props.match.params.id])
 
-  const updateBook = (e) => {
-    e.preventDefault()
+  const updateBook = () => {
     setMessage(null)
-
     if (! currentBook.title || ! currentBook.author) {
       setMessage('Kindly fill up all the fields.')
       return false
@@ -45,7 +43,6 @@ const BookDetail = props => {
         })
         .catch(error => {
           setValidationResError(error.response.data.content.error)
-          setCurrentBook(null)
         })
     }
   }
@@ -73,12 +70,10 @@ const BookDetail = props => {
               {message}
             </Alert>
           : ''}
-          {validationResError ?
-            <Alert variant="warning" closeLabel="x" onClose={() => setValidationResError("")} dismissible>
-              <Alert.Heading>Validation Error</Alert.Heading>
-              <StructureLaravelValidationError errorData={validationResError}></StructureLaravelValidationError>
-            </Alert>
-          : ''}
+          <LaravelValidationAlert
+            setValidationResError={setValidationResError}
+            validationResError={validationResError}>
+          </LaravelValidationAlert>
 
           <BookInputForm book={currentBook} setBook={setCurrentBook}></BookInputForm>
 
