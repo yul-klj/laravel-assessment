@@ -149,5 +149,4 @@ class ExportTest extends TestCase
             ->assertJsonPath('content.data.fields', 'title')
             ->assertJsonPath('content.message', 'Export initialized');
     }
-
 }

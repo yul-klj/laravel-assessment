@@ -6,6 +6,12 @@ use Faker;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+/**
+ * Feature Test for Create book
+ *
+ * @package Tests\Feature
+ * @author Yul <yul_klj@hotmail.com>
+ */
 class BookCreateTest extends TestCase
 {
     use RefreshDatabase;

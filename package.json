@@ -1,7 +1,7 @@
 {
         "private": true,
         "scripts": {
-                "precommit": "./laravel/vendor/bin/phpcs -p --colors --standard=laravel/check_style_rules.xml laravel/routes laravel/public laravel/config laravel/app/Console laravel/app/Events laravel/app/Exceptions laravel/app/Http laravel/app/Listeners laravel/app/Providers laravel/app/Repositories laravel/app/Services laravel/app/Models"
+                "precommit": "./laravel/vendor/bin/phpcs -p --colors --standard=laravel/check_style_rules.xml laravel/routes laravel/public laravel/config laravel/app/Console laravel/app/Events laravel/app/Exceptions laravel/app/Http laravel/app/Listeners laravel/app/Providers laravel/app/Repositories laravel/app/Services laravel/app/Models laravel/tests/Feature laravel/tests/Unit"
         },
         "devDependencies": {
                 "husky": "^0.14.3"

@@ -6,6 +6,12 @@ use Tests\TestCase;
 use App\Models\Book;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+/**
+ * Feature Test for Update book
+ *
+ * @package Tests\Feature
+ * @author Yul <yul_klj@hotmail.com>
+ */
 class BookUpdateTest extends TestCase
 {
     use RefreshDatabase;

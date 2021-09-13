@@ -7,6 +7,12 @@ use Tests\TestCase;
 use App\Models\Book;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+/**
+ * Feature Test for Delete book
+ *
+ * @package Tests\Feature
+ * @author Yul <yul_klj@hotmail.com>
+ */
 class BookDeleteTest extends TestCase
 {
     use RefreshDatabase;
