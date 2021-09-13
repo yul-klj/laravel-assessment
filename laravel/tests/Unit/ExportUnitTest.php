@@ -14,7 +14,7 @@ use Illuminate\Filesystem\Filesystem;
 /**
  * Unit Test for Export core features with validations
  *
- * @package Tests\Feature
+ * @package Tests\Unit
  * @author Yul <yul_klj@hotmail.com>
  */
 class ExportUnitTest extends TestCase
