@@ -150,7 +150,7 @@ class BookRepository
      * @param string $fieldName Field name to validate
      * @return boolean
      */
-    public function validateDbField(string $fieldName)
+    public function validDatabaseField(string $fieldName)
     {
         return in_array($fieldName, Book::ALL_FIELDS);
     }
