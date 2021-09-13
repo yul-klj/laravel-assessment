@@ -71,4 +71,15 @@ class ExportRepository
 
         return $export;
     }
+
+    /**
+     * Validate Export type
+     *
+     * @param string $exportType Type to be validate
+     * @return boolean
+     */
+    public function validExportType(string $exportType)
+    {
+        return in_array($exportType, Export::ALL_EXPORT_TYPE);
+    }
 }
