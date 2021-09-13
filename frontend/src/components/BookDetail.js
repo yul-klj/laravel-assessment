@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import BookDataService from "../services/BookService"
 import Alert from 'react-bootstrap/Alert'
-import StructureLaravelValidationError from "./StructureLaravelValidationError"
+import StructureLaravelValidationError from "../Utils/StructureLaravelValidationError"
 
 const BookDetail = props => {
   const initialBookState = {

@@ -1,8 +1,7 @@
 import React, { useState } from "react"
 import BookDataService from "../services/BookService"
-import { useHistory } from "react-router-dom"
 import Alert from 'react-bootstrap/Alert'
-import StructureLaravelValidationError from "./StructureLaravelValidationError"
+import StructureLaravelValidationError from "../Utils/StructureLaravelValidationError"
 
 const AddBook = props => {
   const initialBookState = {
