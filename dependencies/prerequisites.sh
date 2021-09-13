@@ -54,5 +54,7 @@ type prerequisites >/dev/null 2>&1 || {
     . ~/.profile
     . ~/.bashrc
 
+    nvm install 12.22.5;
+    npm install --global yarn;
 }
 
