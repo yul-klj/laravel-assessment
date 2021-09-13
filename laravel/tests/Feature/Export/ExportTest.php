@@ -28,6 +28,8 @@ class ExportTest extends TestCase
     {
         parent::tearDown();
     }
+        $file = new Filesystem;
+        $file->cleanDirectory('storage/app/public');
 
     /**
      * Test Book Export CSV
