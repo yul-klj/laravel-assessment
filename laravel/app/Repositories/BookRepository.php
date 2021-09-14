@@ -124,13 +124,15 @@ class BookRepository
     /**
      * Search Book
      *
-     * @param array  $params        search mapping, key = field, value = keyword
-     * @param string $orderByField  order by field
-     * @param string $orderByClause order by clause
+     * @param string|null $keyword       search keyword for return in pagination
+     * @param array       $params        search mapping, key = field, value = keyword
+     * @param string      $orderByField  order by field
+     * @param string      $orderByClause order by clause
      * @return Book
      * @throws \Exception
      */
     public function search(
+        $keyword,
         array $params = [],
         string $orderByField = 'id',
         string $orderByClause = 'ASC'
@@ -141,7 +143,12 @@ class BookRepository
         }
         $bookModel = $bookModel->orderBy($orderByField, $orderByClause);
 
-        return $bookModel->cursorPaginate(self::PAGINATE);
+        return $bookModel->paginate(self::PAGINATE)
+            ->appends([
+                'order_field' => $orderByField,
+                'order_clause' => $orderByClause,
+                'keyword' => $keyword
+            ]);
     }
 
     /**

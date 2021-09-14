@@ -102,13 +102,13 @@ class BookService
     /**
      * Search Book
      *
-     * @param string $keyword       Search book keyword
-     * @param string $orderByField  order by field
-     * @param string $orderByClause order by clause
+     * @param string|null $keyword       Search book keyword
+     * @param string      $orderByField  order by field
+     * @param string      $orderByClause order by clause
      * @return array
      */
     public function search(
-        string $keyword = null,
+        $keyword = null,
         string $orderByField = 'id',
         string $orderByClause = 'asc'
     ) {
@@ -123,6 +123,7 @@ class BookService
         }
 
         $books = $this->bookRepository->search(
+            $keyword,
             $searchMappedFields,
             $orderByField,
             $orderByClause
