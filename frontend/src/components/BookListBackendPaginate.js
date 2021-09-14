@@ -9,35 +9,53 @@ const BookListBackendPaginate = (props) => {
   const bookRef = useRef()
   const [message, setMessage] = useState("")
 
-  const [nextPageToken, setNextPageToken] = useState("")
-  const [previousPageToken, setPreviousPageToken] = useState("")
+  // Pagination
+  const [nextPageNumber, setNextPageNumber] = useState("")
+  const [previousPageNumber, setPreviousPageNumber] = useState("")
+  const [currentPageNumber, setCurrentPageNumber] = useState(1)
+  const [maxPageNumber, setMaxPageNumber] = useState(0)
+
+  // Display current page count amount
+  const [fromDataCount, setFromDataCount] = useState(0)
+  const [toDataCount, setToDataCount] = useState(0)
+  const [maxDataCount, setMaxDataCount] = useState(0)
 
   bookRef.current = books
-
-  useEffect(() => {
-    retrieveBooks(null, null)
-  }, [])
 
   const onChangeSearchKeyword = (e) => {
     const searchKeyword = e.target.value
     setSearchKeyword(searchKeyword)
   }
 
-  const retrieveBooks = (pageToken, searchKeyword) => {
-    if (! pageToken) {
-      setNextPageToken(null)
-      setPreviousPageToken(null)
+  const retrieveBooks = (pageNumber, searchKeyword, sortBy, newSearch) => {
+    if (newSearch) {
+      // Pagination resets for new search
+      setNextPageNumber(null)
+      setPreviousPageNumber(null)
+      pageNumber = null
+      setCurrentPageNumber(1)
     }
 
-    BookDataService.search(pageToken, searchKeyword)
+    BookDataService.search(pageNumber, searchKeyword, sortBy)
       .then((response) => {
-        setNextPageToken(null)
-        setPreviousPageToken(null)
+        // Reset page number
+        setNextPageNumber(null)
+        setPreviousPageNumber(null)
+        setMaxPageNumber(response.data.content.data.last_page)
+
+        // Get data count from backend
+        setFromDataCount(response.data.content.data.from)
+        setToDataCount(response.data.content.data.to)
+        setMaxDataCount(response.data.content.data.total)
+
+        if (pageNumber)
+          setCurrentPageNumber(pageNumber)
+
         if (response.data.content.data.next_page_url)
-          setNextPageToken(response.data.content.data.next_page_url.toString().split('=')[1])
+          setNextPageNumber(response.data.content.data.current_page + 1)
 
         if (response.data.content.data.prev_page_url)
-          setPreviousPageToken(response.data.content.data.prev_page_url.toString().split('=')[1])
+          setPreviousPageNumber(response.data.content.data.current_page - 1)
 
         setBooks(response.data.content.data.data)
       })
@@ -113,13 +131,21 @@ const BookListBackendPaginate = (props) => {
     headerGroups,
     page,
     prepareRow,
+    state: { sortBy }
   } = useTable({
       columns,
-      data: books
+      data: books,
+      manualSortBy: true,
+      autoResetPage: false,
+      autoResetSortBy: false,
     },
     useSortBy,
     usePagination
   )
+
+  useEffect(() => {
+    retrieveBooks(currentPageNumber, searchKeyword, sortBy, false)
+  }, [sortBy])
 
   return (
     <div className="list row">
@@ -128,7 +154,7 @@ const BookListBackendPaginate = (props) => {
           {message}
         </Alert>
       : ''}
-      <p className="red">Expect pagination from backend, and sorting is on current view table sort only</p>
+      <p className="red">Expect pagination and sorting from backend</p>
       <div className="col-md-12">
         <div className="input-group mb-3">
           <input
@@ -142,7 +168,7 @@ const BookListBackendPaginate = (props) => {
             <button
               className="btn btn-outline-secondary"
               type="button"
-              onClick={() => retrieveBooks(null, searchKeyword)}
+              onClick={() => retrieveBooks(null, searchKeyword, sortBy, true)}
             >
               Search
             </button>
@@ -184,8 +210,17 @@ const BookListBackendPaginate = (props) => {
           </tbody>
         </table>
         <div className="flexbox text-end">
-          <button className="btn btn-sm btn-primary" onClick={() => retrieveBooks(previousPageToken, searchKeyword)} disabled={!previousPageToken}>◀</button>
-          <button className="btn btn-sm btn-secondary" onClick={() => retrieveBooks(nextPageToken, searchKeyword)} disabled={!nextPageToken}>▶</button>
+          <span>
+            Showing{' '}
+            <strong>{fromDataCount}</strong> - <strong>{toDataCount}</strong> of <strong>{maxDataCount}</strong>
+          </span>
+          <br /><br />
+          <span>
+            Page{' '}
+            <strong>{currentPageNumber} of {maxPageNumber}</strong>
+          </span>{' '}
+          <button className="btn btn-sm btn-primary" onClick={() => retrieveBooks(previousPageNumber, searchKeyword, sortBy, false)} disabled={!previousPageNumber}>◀</button>
+          <button className="btn btn-sm btn-secondary" onClick={() => retrieveBooks(nextPageNumber, searchKeyword, sortBy, false)} disabled={!nextPageNumber}>▶</button>
         </div>
       </div>
     </div>

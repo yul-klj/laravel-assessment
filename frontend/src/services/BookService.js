@@ -20,14 +20,22 @@ const remove = (id) => {
   return http.delete(`/book/${id}`);
 };
 
-const search = (token, keyword) => {
-  if (token)
-    return http.get(`/books/search?cursor=${token}`)
+const search = (page, keyword, sortBy) => {
+  let orderField = 'id'
+  let orderClause = 'asc'
+
+  if (sortBy.length > 0) {
+    orderField = sortBy[0]['id']
+    orderClause = sortBy[0]['desc'] ? 'desc' : 'asc'
+  }
+
+  if (page)
+    return http.get(`/books/search?page=${page}&keyword=${keyword}&order_field=${orderField}&order_clause=${orderClause}`)
 
   if (keyword)
-    return http.get(`/books/search?keyword=${keyword}`);
+    return http.get(`/books/search?keyword=${keyword}&order_field=${orderField}&order_clause=${orderClause}`);
 
-  return http.get(`/books/search`)
+  return http.get(`/books/search?order_field=${orderField}&order_clause=${orderClause}`)
 };
 
 const BookService = {
