@@ -37,9 +37,7 @@ const Export = (props) => {
         }
       })
       .then(async (exportedId) => {
-        setTimeout(() => {
-          retrieveExport(exportedId)
-        }, 1000)
+        retrieveExport(exportedId)
       })
       .catch((e) => {
         console.log(e)
@@ -62,6 +60,11 @@ const Export = (props) => {
       const resData = await response
       if (resData.data.content.data.location) {
         downloadByUrl(resData.data.content.data.location)
+      } else {
+        // Recursive check on Export url
+        setTimeout(() => {
+          retrieveExport(exportedId)
+        }, 2000)
       }
     })
     .catch((e) => {
@@ -101,7 +104,7 @@ const Export = (props) => {
 
       <div className="w-50 text-end" role="group">
         <button className="btn btn-sm btn-success" onClick={generateExport}>
-          Export CSV
+          Export
         </button>
       </div>
     </div>
