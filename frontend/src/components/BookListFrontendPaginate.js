@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef } from "react"
 import BookDataService from "../services/BookService"
-import { useTable, useSortBy, usePagination, useGlobalFilter } from "react-table"
+import { useTable, useSortBy, usePagination, useGlobalFilter, useRowState } from "react-table"
 import Alert from 'react-bootstrap/Alert'
 
 const BookListFrontendPaginate = (props) => {
@@ -13,6 +13,10 @@ const BookListFrontendPaginate = (props) => {
   useEffect(() => {
     retrieveBooks()
   }, [])
+
+  const keywordOnChange = (e) => {
+    setGlobalFilter(e.target.value || undefined)
+  }
 
   const retrieveBooks = () => {
     BookDataService.getAll()
@@ -95,20 +99,21 @@ const BookListFrontendPaginate = (props) => {
     canNextPage,
     canPreviousPage,
     pageOptions,
-    state: {pageIndex},
     prepareRow,
     state,
-    setGlobalFilter
+    setGlobalFilter,
+    rows
   } = useTable({
       columns,
-      data: books
+      data: books,
+      initialState: { pageSize: 10 },
     },
     useGlobalFilter,
     useSortBy,
     usePagination
   )
 
-  const { globalFilter } = state
+  const { globalFilter, pageIndex, pageSize } = state
 
   return (
     <div className="list row">
@@ -125,7 +130,7 @@ const BookListFrontendPaginate = (props) => {
             className="form-control"
             placeholder="Search by keyword"
             value={globalFilter}
-            onChange={(e) => setGlobalFilter(e.target.value || undefined)}
+            onChange={keywordOnChange}
           />
         </div>
       </div>
@@ -164,7 +169,14 @@ const BookListFrontendPaginate = (props) => {
           </tbody>
         </table>
         <div className="flexbox text-end">
-            <span>
+          <span>
+            Showing{' '}
+            <strong>{pageIndex * pageSize + 1}</strong>{' - '}
+            <strong>{canNextPage ? (pageIndex * pageSize + 1) + pageSize - 1 : rows.length}</strong>{' of '}
+            <strong>{rows.length}</strong>
+          </span>
+          <br /><br />
+          <span>
             Page{' '}
             <strong>{pageIndex + 1} of {pageOptions.length}</strong>
           </span>{' '}
